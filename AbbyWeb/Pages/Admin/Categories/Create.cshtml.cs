@@ -1,19 +1,19 @@
-﻿using Abby.DataAccess;
+﻿using Abby.DataAccess.Repository.IRepository;
 using Abby.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace AbbyWeb.Pages.Categories;
+namespace AbbyWeb.Pages.Admin.Categories;
 
 [BindProperties]
 public class CreateModel : PageModel
 {
-    private readonly ApplicationDbContext _db;
+    private readonly IUnitOfWork _unitOfWork;
     public Category Category { get; set; }
 
-    public CreateModel(ApplicationDbContext db)
+    public CreateModel(IUnitOfWork unitOfWork)
     {
-        _db = db;
+        _unitOfWork = unitOfWork;
     }
     
     public void OnGet()
@@ -21,7 +21,7 @@ public class CreateModel : PageModel
         
     }
 
-    public async Task<IActionResult> OnPost()
+    public IActionResult OnPost()
     {
         if (Category.Name == Category.DisplayOrder.ToString())
         {
@@ -30,10 +30,10 @@ public class CreateModel : PageModel
         
         if (ModelState.IsValid)
         {
-            await _db.Categories.AddAsync(Category);
-            await _db.SaveChangesAsync();
+            _unitOfWork.CategoryRepository.Add(Category);
+            _unitOfWork.Save();
             TempData["success"] = $"Category: {Category.Name} created successfully";
-            return RedirectToPage("/Categories/Index");
+            return RedirectToPage("/Admin/Categories/Index");
         }
 
         return Page();

@@ -22,7 +22,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Data" />
+    <Folder Include="Pages\Customer" />
+    <Folder Include="wwwroot\images\menuitems" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include="Pages\Admin\Categories\Create.cshtml" />
+    <AdditionalFiles Include="Pages\Admin\Categories\Delete.cshtml" />
+    <AdditionalFiles Include="Pages\Admin\Categories\Edit.cshtml" />
+    <AdditionalFiles Include="Pages\Admin\Categories\Index.cshtml" />
   </ItemGroup>
 
 </Project>

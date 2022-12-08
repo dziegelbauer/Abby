@@ -1,0 +1,18 @@
+﻿@page
+@model DeleteModel
+
+<form method="post">
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2 class="text-primarypl-3">Delete Food Type</h2>
+            <hr/>
+        </div>
+        <div asp-validation-summary="All"></div>
+        <div class="mb-3">
+            <label asp-for="FoodType.Name"></label>
+            <input disabled type="text" asp-for="@Model.FoodType.Name" class="form-control"/>
+        </div>
+        <button type="submit" class="btn btn-danger" style="width: 150px;">Delete</button>
+        <a asp-page="/Admin/Categories/Index" class="btn btn-secondary" style="width: 150px;">Back to List</a>
+    </div>
+</form>

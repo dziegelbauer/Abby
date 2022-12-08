@@ -1,5 +1,5 @@
 ﻿@page
-@model AbbyWeb.Pages.Categories.DeleteModel
+@model DeleteModel
 
 <form method="post">
     <div class="border p-3 mt-4">
@@ -17,6 +17,6 @@
             <input disabled type="text" asp-for="@Model.Category.DisplayOrder" class="form-control"/>
         </div>
         <button type="submit" class="btn btn-danger" style="width: 150px;">Delete</button>
-        <a asp-page="/Categories/Index" class="btn btn-secondary" style="width: 150px;">Back to List</a>
+        <a asp-page="/Admin/Categories/Index" class="btn btn-secondary" style="width: 150px;">Back to List</a>
     </div>
 </form>

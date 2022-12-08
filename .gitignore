@@ -1,0 +1,10 @@
+.idea/
+.vs/
+AbbyWeb/bin/*
+AbbyWeb/obj/*
+Abby.DataAccess/bin/*
+Abby.DataAccess/obj/*
+Abby.Models/bin/*
+Abby.Models/obj/*
+Abby.Utility/bin/*
+Abby.Utility/obj/*
