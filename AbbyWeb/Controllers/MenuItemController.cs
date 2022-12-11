@@ -19,14 +19,14 @@ public class MenuItemController : Controller
     [HttpGet]
     public IActionResult Get()
     {
-        var menuItemList = _unitOfWork.MenuItemRepository.GetAll("FoodType,Category");
+        var menuItemList = _unitOfWork.MenuItemRepository.GetAll(includeProperties: "FoodType,Category");
         return Json(new { data = menuItemList });
     }
 
     [HttpDelete("{id}")]
     public IActionResult Delete(int id)
     {
-        var objFromDb = _unitOfWork.MenuItemRepository.GetFirstOrDefault(u => u.Id == id);
+        var objFromDb = _unitOfWork.MenuItemRepository.GetFirstOrDefault(filter: u => u.Id == id);
 
         var webRootPath = _webHostEnvironment.WebRootPath;
         System.IO.File.Delete(webRootPath + objFromDb.Image);

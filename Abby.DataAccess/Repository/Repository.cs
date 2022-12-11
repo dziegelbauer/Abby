@@ -29,9 +29,16 @@ public class Repository<T> : IRepository.IRepository<T> where T : class
         _dbSet.RemoveRange(entities);
     }
 
-    public IEnumerable<T> GetAll(string? includeProperties = null)
+    public IEnumerable<T> GetAll(Expression<Func<T, bool>>? filter = null, 
+                                 Func<IQueryable<T>,IOrderedQueryable<T>>? orderby = null, 
+                                 string? includeProperties = null)
     {
         IQueryable<T> query = _dbSet;
+        if (filter != null)
+        {
+            query = query.Where(filter);
+        }
+        
         if (includeProperties != null)
         {
             foreach (var includeProperty in includeProperties.Split(",",StringSplitOptions.RemoveEmptyEntries))
@@ -39,16 +46,31 @@ public class Repository<T> : IRepository.IRepository<T> where T : class
                 query = query.Include(includeProperty);
             }
         }
+
+        if (orderby != null)
+        {
+            return orderby(query).ToList();
+        }
+        
         return query.ToList();
     }
 
-    public T GetFirstOrDefault(Expression<Func<T, bool>>? filter = null)
+    public T GetFirstOrDefault(Expression<Func<T, bool>>? filter = null, string? includeProperties = null)
     {
         IQueryable<T> query = _dbSet;
         if (filter != null)
         {
             query = query.Where(filter);
         }
+        
+        if (includeProperties != null)
+        {
+            foreach (var includeProperty in includeProperties.Split(",",StringSplitOptions.RemoveEmptyEntries))
+            {
+                query = query.Include(includeProperty);
+            }
+        }
+        
         return query.FirstOrDefault()!;
     }
 }
