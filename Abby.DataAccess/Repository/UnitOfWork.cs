@@ -13,11 +13,14 @@ public class UnitOfWork : IUnitOfWork
         CategoryRepository = new CategoryRepository(_db);
         FoodTypeRepository = new FoodTypeRepository(_db);
         MenuItemRepository = new MenuItemRepository(_db);
+        ShoppingCartRepository = new ShoppingCartRepository(_db);
     }
 
     public ICategoryRepository CategoryRepository { get; }
     public IFoodTypeRepository FoodTypeRepository { get; }
     public IMenuItemRepository MenuItemRepository { get; }
+    
+    public IShoppingCartRepository ShoppingCartRepository { get; }
     
     public void Save()
     {
