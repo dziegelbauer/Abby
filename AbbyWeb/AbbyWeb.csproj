@@ -15,6 +15,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.10" />
+    <PackageReference Include="Stripe.net" Version="41.3.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -32,6 +33,10 @@
     <AdditionalFiles Include="Pages\Admin\Categories\Delete.cshtml" />
     <AdditionalFiles Include="Pages\Admin\Categories\Edit.cshtml" />
     <AdditionalFiles Include="Pages\Admin\Categories\Index.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Pages\Order\OrderList.cshtml" />
   </ItemGroup>
 
 </Project>

@@ -1,0 +1,60 @@
+﻿@page
+@using Abby.Models
+@model AbbyWeb.Pages.Admin.Order.ManageOrderModel
+@using Abby.Utility
+
+
+<h1 class="text-primary py-3">Manage Orders</h1>
+<form method="post">
+    <div class="container row bg-white p-2 mb-3 rounded">
+        @foreach (var order in Model.OrderDetailVms)
+        {
+            <div class="col-12 pb-3 pt-3 mt-4 border  rounded">
+                <div class="row">
+                    <div class="col-4">
+                        Order Number : @order.OrderHeader.Id
+                        <ul class="text-info">
+                            @foreach (var item in order.OrderDetailsList)
+                            {
+                                <li>@item.Name x @item.Count</li>
+                            }
+                        </ul>
+                    </div>
+                    <div class="col-4 pb-2">
+                        <div class="input-group pb-2">
+                            <div class="input-group-append">
+                                <span class="input-group-text bg-secondary border">Time</span>
+                            </div>
+                            <input value="@order.OrderHeader.PickUpDate.ToShortDateString() @order.OrderHeader.PickUpDate.ToShortTimeString()" type="text" class="form-control" readonly/>
+                        </div>
+                        <textarea readonly class="rounded border form-control" rows="3" >@order.OrderHeader.Comments</textarea>
+                    </div>
+                    <div class="col-3 offset-1 d-flex align-content-center">
+                        <div class="col-12">
+                            @if (order.OrderHeader.Status == SD.StatusSubmitted)
+                            {
+                                <button asp-page-handler="OrderInProcess" asp-route-id="@order.OrderHeader.Id" type="submit" class="btn btn-primary form-control mb-3">
+                                    <i class="bi bi-check-square"></i> &nbsp; Start Cooking
+                                </button>
+                            }
+                            
+                            @if (order.OrderHeader.Status == SD.StatusInProcess)
+                            {
+                                <button asp-page-handler="OrderReady" asp-route-id="@order.OrderHeader.Id" type="submit" class="btn btn-success form-control mb-3">
+                                    <i class="bi bi-emoji-laughing"></i> &nbsp; Order Ready
+                                </button>
+                            }
+
+                            <button asp-page-handler="OrderCancel" asp-route-id="@order.OrderHeader.Id" type="submit" class="btn btn-warning form-control mb-3">
+                                <i class="bi bi-x-square-fill"></i> &nbsp; Cancel Order
+                            </button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        </div >
+</form>
+
+

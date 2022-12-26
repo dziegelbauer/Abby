@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace AbbyWeb.Pages
 {
-    public class IndexModel : PageModel
+    public class OrderListModel : PageModel
     {
         public IActionResult OnGet()
         {
